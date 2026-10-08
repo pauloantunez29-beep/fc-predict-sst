@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd, numpy as np, joblib
 import plotly.express as px
 from pathlib import Path
-st.set_page_config(page_title="FC PREDICT SST 6.6",page_icon="🦺",layout="wide")
+st.set_page_config(page_title="FC PREDICT SST 6.8",page_icon="🦺",layout="wide")
 P=Path(__file__).parent
 hist=pd.read_csv(P/'historico_real.csv')
 hist['IA']=hist['IF']*hist['IS']/1000
@@ -31,7 +31,7 @@ st.markdown("""<style>
 h1,h2,h3{color:#173f62!important}
 div.stButton>button[kind="primary"]{background:linear-gradient(100deg,#0a5984,#1c89ac);border-radius:12px;font-weight:750}
 </style>""",unsafe_allow_html=True)
-st.title('🦺 FC PREDICT SST 6.6')
+st.title('🦺 FC PREDICT SST 6.8')
 st.markdown('### Centro de inteligencia preventiva · FC Estructuras E.I.R.L.')
 st.caption('Pronóstico mensual por cuadrilla · Antecedentes 2021–2025 · Gestión preventiva')
 st.markdown('**Categorías:** accidente de trabajo = lesión laboral; accidente incapacitante = accidente con incapacidad y días perdidos; incidente = suceso sin lesión incapacitante. No deben sumarse como categorías independientes.')
@@ -153,9 +153,11 @@ with t1:
    best_p=1-np.exp(-tasa*hht*best_factor*(1.15 if avg_exp<2 else (1.05 if avg_exp<5 else 1.0)))
    best_inc=1-np.exp(-tasa_inc*hht*best_factor*(1.15 if avg_exp<2 else (1.05 if avg_exp<5 else 1.0)))
    st.markdown('#### ¿Qué está influyendo en el pronóstico?')
-   factores=[('Nivel IPERC', {1:'Bajo',2:'Medio',3:'Alto'}[iperc],f_iperc),('Actos subestándares',str(len(acts)),f_act),('Condiciones subestándares',str(len(conds)),f_cond),('Estado de controles, EPP e inspección', 'Con desviaciones' if not (controls and epp and preuso) else 'Conformes',f_controls),('Experiencia media de la cuadrilla',f'{avg_exp:.1f} años',f_exp)]
+   factores=[('Nivel IPERC', {1:'Bajo',2:'Medio',3:'Alto'}[iperc],f_iperc),('Actos subestándares',str(len(acts)),f_act),('Condiciones subestándares',str(len(conds)),f_cond),('Estado de controles, EPP e inspección', ', '.join((["Controles críticos no implementados"] if not controls else [])+(["EPP no conforme"] if not epp else [])+(["Inspección preuso no conforme"] if not preuso else [])) if not (controls and epp and preuso) else 'Conformes',f_controls),('Experiencia media de la cuadrilla',f'{avg_exp:.1f} años',f_exp)]
    st.dataframe(pd.DataFrame(factores,columns=['Factor evaluado','Dato ingresado','Multiplicador de escenario']).style.format({'Multiplicador de escenario':'{:.2f} ×'}),hide_index=True,use_container_width=True)
    st.caption('Un multiplicador mayor que 1 incrementa la estimación respecto de la referencia; menor que 1 la reduce. Estos multiplicadores son parámetros preventivos definidos para el escenario, no coeficientes estadísticos aprendidos de los accidentes de la empresa.')
+   st.markdown('#### Riesgo inherente y riesgo residual')
+   st.info('**Nivel IPERC seleccionado:** '+{1:'Bajo',2:'Medio',3:'Alto'}[iperc]+'. El escenario corregido mantiene este nivel IPERC y la experiencia de la cuadrilla; solo elimina las desviaciones operativas seleccionadas. El porcentaje posterior NO acredita por sí solo un riesgo aceptable ni autoriza el inicio del trabajo. El riesgo residual debe verificarse en la matriz IPERC aplicable y mediante supervisión en campo.')
    st.markdown('#### Efecto esperado de corregir desviaciones')
    st.write(f'**Accidente incapacitante:** de **{p*100:.2f} %** a **{best_p*100:.2f} %** (cambio de **{(p-best_p)*100:.2f} puntos porcentuales**).')
    st.write(f'**Incidente:** de **{p_inc*100:.2f} %** a **{best_inc*100:.2f} %** (cambio de **{(p_inc-best_inc)*100:.2f} puntos porcentuales**).')
@@ -181,6 +183,9 @@ with t1:
    if not controls: measures.append('Implementar y verificar controles críticos obligatorios.')
    if not epp: measures.append('Comprobar EPP apropiado y su uso efectivo.')
    if not preuso: measures.append('Completar inspección preuso y retirar equipos no conformes.')
+   if 'soldad' in actividad.lower():
+    measures.extend(['Verificar permiso de trabajo en caliente, aislamiento de materiales combustibles y disponibilidad de extintor operativo.', 'Revisar cables, pinza de masa, conexiones y estado de la máquina de soldar antes del uso.', 'Verificar pantalla facial de soldadura, guantes, ropa de protección y protección respiratoria según exposición.', 'Comprobar ventilación o extracción de humos y delimitar el área para proteger a terceros.'])
+   if iperc==3: measures.append('Revisar el riesgo residual en la matriz IPERC específica y obtener autorización del responsable SST antes del inicio.')
    if not measures: measures=['Mantener inspecciones, supervisión y controles existentes.']
    for m in measures: st.write('• '+m)
 with t2:

@@ -1,0 +1,8 @@
+FC PREDICT SST 6.6 — Dashboard y pronóstico mensual explicado.
+
+1. Extraer el ZIP.
+2. Abrir CMD dentro de la carpeta que contiene app.py.
+3. Ejecutar: python -m pip install -r requirements.txt
+4. Ejecutar: python -m streamlit run app.py
+
+La columna Origen del registro muestra Registros internos como categoría de la base de la aplicación. Las fechas asignadas para el calendario no son fechas empresariales verificadas. Los pronósticos son escenarios orientativos, no modelos validados con registros de incidentes confirmados.

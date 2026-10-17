@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd, numpy as np, joblib
 import plotly.express as px
 from pathlib import Path
-st.set_page_config(page_title="FC PREDICT SST 6.8",page_icon="🦺",layout="wide")
+st.set_page_config(page_title="FC PREDICT SST 7.1 · análisis multivariable",page_icon="🦺",layout="wide")
 P=Path(__file__).parent
 hist=pd.read_csv(P/'historico_real.csv')
 hist['IA']=hist['IF']*hist['IS']/1000
@@ -31,9 +31,11 @@ st.markdown("""<style>
 h1,h2,h3{color:#173f62!important}
 div.stButton>button[kind="primary"]{background:linear-gradient(100deg,#0a5984,#1c89ac);border-radius:12px;font-weight:750}
 </style>""",unsafe_allow_html=True)
-st.title('🦺 FC PREDICT SST 6.8')
+st.title('🦺 FC PREDICT SST 7.1 · análisis multivariable')
 st.markdown('### Centro de inteligencia preventiva · FC Estructuras E.I.R.L.')
-st.caption('Pronóstico mensual por cuadrilla · Antecedentes 2021–2025 · Gestión preventiva')
+st.caption('Pronóstico por cuadrilla · Históricos 2021–2025 · Análisis multivariable 7.1')
+st.info('📊 El modelo Poisson multivariable ajustado con datos de prueba está disponible en la página **Modelo Poisson multivariable** del menú lateral. El pronóstico de esta pantalla conserva el método histórico con multiplicadores heurísticos de la versión anterior.')
+st.page_link('pages/7_Modelo_Poisson_multivariable.py',label='Abrir modelo multivariable 7.1',icon='📈')
 st.markdown('**Categorías:** accidente de trabajo = lesión laboral; accidente incapacitante = accidente con incapacidad y días perdidos; incidente = suceso sin lesión incapacitante. No deben sumarse como categorías independientes.')
 t0,t1,t2,t3,t4=st.tabs(['🏠 Dashboard ejecutivo','🎯 Pronóstico por cuadrilla','📊 Antecedentes 2021–2025','📅 Análisis por mes y año','📘 Modelo y datos'])
 with t0:
@@ -74,6 +76,7 @@ with t1:
  comparacion=comparacion[comparacion['Mes']==MESES[month-1]]
  st.dataframe(comparacion[['Año','Mes','Accidentes incapacitantes','Accidentes no incapacitantes','Incidentes']],hide_index=True,use_container_width=True)
  st.markdown('#### Características de la cuadrilla')
+ st.info('Edad y experiencia se registran por trabajador. La edad se utiliza solo para describir la cuadrilla; la experiencia media participa en un ajuste heurístico. Los actos, condiciones, IPERC y controles son entradas de escenario, no relaciones causales validadas.')
  # Los campos numéricos son editables con teclado y botones +/-.
  perfiles=[(21,1),(24,2),(28,4),(32,7),(39,12),(45,18),(26,3),(35,9),(51,23),(30,6),(23,2),(42,15),(37,11),(29,5),(48,20)]
  if 'cuadrilla_perfiles' not in st.session_state:
@@ -289,3 +292,9 @@ with t4:
  st.dataframe(pd.DataFrame({'Acto subestándar':ACTOS}),hide_index=True,use_container_width=True)
  st.markdown('#### Diccionario de condiciones subestándares')
  st.dataframe(pd.DataFrame({'Condición subestándar':COND}),hide_index=True,use_container_width=True)
+
+# Diccionario de datos y procedencia de las variables
+with st.expander('📋 Diccionario de variables y trazabilidad del modelo', expanded=False):
+ st.markdown('**Histórico:** HHT, accidentes incapacitantes y días perdidos, 2021–2025. **Escenario editable:** edad, experiencia, actividad, número de trabajadores, días, horas, actos y condiciones subestándares, IPERC, EPP, preuso y controles críticos. **Desarrollo:** etiquetas de accidentes e incidentes individuales; no son registros empresariales validados.')
+ st.dataframe(pd.read_csv(P/'diccionario_variables.csv'),hide_index=True,use_container_width=True)
+ st.warning('No se han agregado observaciones empresariales inventadas. Los coeficientes de los factores preventivos son supuestos de escenario, no estimaciones causales. La edad no modifica la probabilidad; la experiencia media usa un ajuste ilustrativo.')

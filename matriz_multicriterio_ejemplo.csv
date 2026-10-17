@@ -1,0 +1,21 @@
+﻿actividad,riesgo,codigo,medida,jerarquia,eficacia,viabilidad,costo,tiempo,impacto_produccion,total_ponderado
+Esmerilado / corte,Proyección de partículas y cortes,E1,Adquirir piezas precortadas y desbarbadas,Eliminación,5,3,3,3,4,4.00
+Esmerilado / corte,Proyección de partículas y cortes,E2,Sustituir acabado manual por equipo automatizado,Sustitución,4,3,2,2,4,3.30
+Esmerilado / corte,Proyección de partículas y cortes,E3,"Resguardos, pantallas y mordazas de sujeción",Ingeniería,4,5,4,4,4,4.20
+Esmerilado / corte,Proyección de partículas y cortes,E4,Inspecciones y procedimientos,Administrativo,2,5,5,5,4,3.55
+Esmerilado / corte,Proyección de partículas y cortes,E5,Protección ocular y facial,EPP,2,5,5,5,5,3.65
+Soldadura,Exposición a humos metálicos,S1,Sustituir unión soldada por empernada si diseño lo permite,Eliminación,5,2,3,2,3,3.60
+Soldadura,Exposición a humos metálicos,S2,Consumibles de menor emisión técnicamente compatibles,Sustitución,3,4,4,4,4,3.55
+Soldadura,Exposición a humos metálicos,S3,Extracción localizada en fuente con verificación,Ingeniería,5,4,3,3,4,4.20
+Soldadura,Exposición a humos metálicos,S4,Rotación y procedimientos,Administrativo,2,5,5,5,3,3.45
+Soldadura,Exposición a humos metálicos,S5,Respirador adecuado según evaluación,EPP,3,4,4,4,4,3.55
+Montaje y manipulación,Aplastamiento y sobreesfuerzo,M1,Prefabricar para eliminar maniobras de reubicación,Eliminación,5,3,3,3,4,4.00
+Montaje y manipulación,Aplastamiento y sobreesfuerzo,M2,Sustituir traslado manual por sistemas rodantes,Sustitución,4,4,3,4,4,3.85
+Montaje y manipulación,Aplastamiento y sobreesfuerzo,M3,Mesas elevadoras y soportes de capacidad verificada,Ingeniería,5,4,3,3,4,4.20
+Montaje y manipulación,Aplastamiento y sobreesfuerzo,M4,Procedimiento y señalización,Administrativo,2,5,5,5,4,3.55
+Montaje y manipulación,Aplastamiento y sobreesfuerzo,M5,Guantes y calzado de seguridad,EPP,2,5,5,5,4,3.55
+Trabajo con estructuras,Caída o vuelco de piezas,C1,Eliminar izajes innecesarios mediante montaje a nivel,Eliminación,5,3,3,3,4,4.00
+Trabajo con estructuras,Caída o vuelco de piezas,C2,Cambiar método de montaje por módulos más estables,Sustitución,4,3,3,3,4,3.55
+Trabajo con estructuras,Caída o vuelco de piezas,C3,"Soportes certificados, retenedores y topes físicos",Ingeniería,5,4,3,3,4,4.20
+Trabajo con estructuras,Caída o vuelco de piezas,C4,Procedimiento de maniobra y vigía,Administrativo,2,5,5,5,4,3.55
+Trabajo con estructuras,Caída o vuelco de piezas,C5,Casco y calzado,EPP,1,5,5,5,4,3.10

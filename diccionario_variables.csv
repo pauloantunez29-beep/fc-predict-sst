@@ -1,0 +1,13 @@
+﻿variable,tipo_fuente,unidad,rol_modelo,validacion
+Edad,Entrada de escenario,Años por trabajador,Descriptiva; no modifica directamente Poisson,No validado a nivel individual
+Experiencia,Entrada de escenario,Años por trabajador,"Factor heurístico de experiencia media, no calibrado",No validado a nivel individual
+Actividad y puesto,Entrada de escenario,Categoría,Contexto para selección de controles,No validado a nivel individual
+"Trabajadores, días y horas",Entrada de escenario,"Número, días, h/día",Exposición: E = n × días × horas,No validado a nivel individual
+Actos subestándares,Entrada de escenario,Categorías seleccionadas,Multiplicador ilustrativo,No validado a nivel individual
+Condiciones subestándares,Entrada de escenario,Categorías seleccionadas,Multiplicador ilustrativo,No validado a nivel individual
+Nivel IPERC,Entrada de escenario,1 a 3,Multiplicador ilustrativo y evaluación SST,No validado a nivel individual
+"EPP, preuso, controles críticos",Entrada de escenario,Conforme/no conforme,Multiplicadores ilustrativos; verificación independiente,No validado a nivel individual
+Accidentes incapacitantes,Serie histórica 2021–2025,Conteo anual,Tasa base Poisson,Agregado anual de informe; contrastar con partes originales
+HHT,Serie histórica 2021–2025,Horas anuales,Denominador de tasa base,Agregado anual de informe; contrastar con partes originales
+Días perdidos,Serie histórica 2021–2025,Días anuales,Índice de severidad,Agregado anual de informe; contrastar con partes originales
+Incidentes individuales,Datos de desarrollo,Etiqueta/conteo,No calibrados con partes reales,No validado a nivel individual
